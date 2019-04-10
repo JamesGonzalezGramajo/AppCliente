@@ -1,0 +1,186 @@
+<accion nombre = "NUEVO_SITIO_WEB">
+    <parametros>
+
+        <parametro nombre = "ID">
+            [$miID]
+        </parametro>
+
+        <parametro nombre = "USUARIO_CREACION">
+            [-miUsuario]
+        </parametro>
+
+        <parametro nombre = "FECHA_CREACION">
+            [2012-10-10]
+        </parametro>
+
+
+    </parametros>
+
+</accion>
+
+
+
+<accion nombre = "BORRAR_SITIO_WEB">
+    <parametros>
+
+        <parametro nombre = "ID">
+            [$miID]
+        </parametro>
+
+    </parametros>
+
+</accion>
+
+
+
+<accion nombre = "NUEVA_PAGINA">
+    <parametros>
+
+        <parametro nombre = "ID">
+            [$miID]
+        </parametro>
+
+        <parametro nombre = "SITIO">
+            [-miSitio]
+        </parametro>
+
+        <parametro nombre = "PADRE">
+            [_miPadre]
+        </parametro>
+
+        <parametro nombre = "FECHA_CREACION">
+            [2012-10-10]
+        </parametro>
+
+        <parametro nombre = "TITULO">
+            [mi TITULO]
+        </parametro>
+
+    </parametros>
+
+    <etiquetas>
+
+        <etiqueta valor = "$etiqueta_james"/>
+        <etiqueta valor = "$etiqueta_anthony"/>
+        <etiqueta valor = "$etiqueta_gonzalez"/>
+        <etiqueta valor = "$etiqueta_gramajo"/>
+
+    </etiquetas>
+
+</accion>
+
+
+<accion nombre = "MODIFICAR_PAGINA">
+    <parametros>
+
+
+        <parametro nombre = "ID">
+            [_miID]
+        </parametro>
+
+
+
+        <parametro nombre = "TITULO">
+            [mi titulo va aca]
+        </parametro>
+
+
+    </parametros>
+
+    <etiquetas>
+
+        <etiqueta valor = "$etiqueta1"/>
+        <etiqueta valor = "-etiqueta2"/>
+        <etiqueta valor = "$etiqueta3"/>
+        <etiqueta valor = "-etiqueta4"/>
+
+    </etiquetas>
+
+</accion>
+
+
+<accion nombre = "BORRAR_PAGINA">
+    <parametros>
+
+        <parametro nombre = "ID">
+            [$miID]
+        </parametro>
+
+    </parametros>
+
+</accion>
+
+<accion nombre = "AGREGAR_COMPONENTE">
+    <parametros>
+
+        <parametro nombre = "ID">
+            [$miID]
+        </parametro>
+
+        <parametro nombre = "PAGINA">
+            [-miPAgina]
+        </parametro>
+
+        <parametro nombre = "CLASE">
+            [PARRAFO]
+        </parametro>
+
+    </parametros>
+
+    <atributos>
+
+        <atributo nombre = "TEXTO">
+
+            [james anthony]
+
+        </atributo>
+
+    </atributos>
+
+</accion>
+
+<accion nombre = "MODIFICAR_COMPONENTE">
+    <parametros>
+
+        <parametro nombre = "ID">
+            [$miID]
+        </parametro>
+
+        <parametro nombre = "PAGINA">
+            [-miPAgina]
+        </parametro>
+
+        <parametro nombre = "CLASE">
+            [VIDEO]
+        </parametro>
+
+    </parametros>
+
+    <atributos>
+
+        <atributo nombre = "ANCHO">
+
+            [65]
+
+        </atributo>
+
+    </atributos>
+
+</accion>
+
+<accion nombre = "BORRAR_COMPONENTE">
+    <parametros>
+
+        <parametro nombre = "ID">
+            [$miID]
+        </parametro>
+
+        <parametro nombre = "PAGINA">
+            [-miPAgina]
+        </parametro>
+
+    </parametros>
+
+</accion>
+
+

@@ -1,0 +1,1056 @@
+package Analizadores;
+import gui.Frames.VentanaAppCliente;
+import Manejadores.ManejadorVerificacionObligatorios;
+import java_cup.runtime.*;
+
+
+parser code {:
+
+    VentanaAppCliente ventana;
+    //ManejadorVerificacionObligatorios manejadorVerificaciones;
+
+
+
+    public parser(miLexer lexer, VentanaAppCliente ventana) {
+		super(lexer);
+        this.ventana=ventana;
+ 
+	}
+
+
+    public void syntax_error(Symbol cur_token) {
+            System.out.println("Error sobrecargado <" + cur_token.value + "> || "   
+            + cur_token.sym+" \n");
+            //ventana.agregarTexto("     *** ERROR: Comando invalido ***");
+            //ventana.agregarTexto("     *** Componente:  \"" + cur_token.value + "\" no reconocido");  
+    }
+
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        System.out.println("Error síntactico irrecuperable en la Línea " + 
+        (s.left)+ " Columna "+s.right+". Componente: " + s.value + 
+        " no reconocido.\n");
+
+        ventana.escribirEnTextAreaDeErroresSintacticos("Error síntactico irrecuperable en: \n         Línea " + 
+        (s.left)+ "\n         Columna "+s.right+"\n         Componente: " + s.value + 
+        " no reconocido.\n"); 
+        
+    }  
+
+    
+
+        
+:}
+
+
+
+/* Terminals*/
+
+
+
+terminal String MENOR_Q;
+terminal String MAYOR_Q;
+terminal String DIAGONAL;
+terminal String COMILLA;
+terminal String IGUAL;
+
+terminal String ATRIBUTO;
+terminal String ATRIBUTOS;
+terminal String ACCION;
+terminal String ACCIONES;
+terminal String NOMBRE;
+terminal String PARAMETRO;
+terminal String PARAMETROS;
+terminal String ETIQUETA;
+terminal String ETIQUETAS;
+terminal String VALOR;
+
+terminal String NUEVO_SITIO_WEB;
+terminal String BORRAR_SITIO_WEB;
+terminal String NUEVA_PAGINA;
+terminal String MODIFICAR_PAGINA;
+terminal String BORRAR_PAGINA;
+terminal String AGREGAR_COMPONENTE;
+terminal String MODIFICAR_COMPONENTE;
+terminal String BORRAR_COMPONENTE;
+
+terminal String ID;
+terminal String USUARIO_CREACION;
+terminal String FECHA_CREACION;
+terminal String FECHA_MODIFICACION;
+terminal String USUARIO_MODIFICACION;
+terminal String TITULO;
+terminal String SITIO;
+terminal String PADRE;
+terminal String PAGINA;
+terminal String CLASE;
+
+terminal String PARRAFO;
+terminal String IMAGEN;
+terminal String VIDEO;
+terminal String MENU;
+
+terminal String TEXTO;
+terminal String ALINEACION;
+terminal String CENTRAR;
+terminal String IZQUIERDA;
+terminal String DERECHA;
+terminal String JUSTIFICAR;
+
+terminal String COLOR;
+terminal String ALTURA;
+terminal String ANCHO;
+terminal String IDENTIFICADOR;
+terminal String ORIGEN;
+terminal String DATO;
+terminal String ORACION;
+terminal String FECHA;
+
+terminal String ID_ETIQUETA;
+
+terminal String ENTERO;
+terminal String HEXADECIMAL;
+terminal String URL;
+
+
+
+/*No Terminales*/
+
+
+
+non terminal String MenorQ;
+non terminal String MayorQ;
+non terminal String Diagonal;
+non terminal String Comilla;
+non terminal String Igual;
+
+non terminal String Atributo;
+non terminal String Atributos;
+non terminal String Accion;
+non terminal String Acciones;
+non terminal String Nombre;
+non terminal String Parametro;
+non terminal String Parametros;
+non terminal String Etiqueta;
+non terminal String Etiquetas;
+non terminal String Valor;
+
+non terminal String NuevoSitioWeb;
+non terminal String BorrarSitioWeb;
+non terminal String NuevaPagina;
+non terminal String ModificarPagina;
+non terminal String BorrarPagina;
+non terminal String AgregarComponente;
+non terminal String ModificarComponente;
+non terminal String BorrarComponente;
+
+non terminal String Id;
+non terminal String UsuarioCreacion;
+non terminal String FechaCreacion;
+non terminal String FechaModificacion;
+non terminal String UsuarioModificacion;
+non terminal String Titulo;
+non terminal String Sitio;
+non terminal String Padre;
+non terminal String Pagina;
+non terminal String Clase;
+
+non terminal String Parrafo;
+non terminal String Imagen;
+non terminal String Video;
+non terminal String Menu;
+
+non terminal String Texto;
+non terminal String Alineacion;
+non terminal String Centrar;
+non terminal String Izquierda;
+non terminal String Derecha;
+non terminal String Justificar;
+
+non terminal String Color;
+non terminal String Altura;
+non terminal String Ancho;
+non terminal String Identificador;
+non terminal String Dato;
+non terminal String Origen;
+non terminal String Oracion;
+non terminal String Fecha;
+
+non terminal String Id_Etiqueta;
+non terminal String Entero;
+non terminal String Hexadecimal;
+non terminal String Url;
+
+/*NO terminales Gramatica*/
+
+non terminal String         inicio;
+non terminal String         conjuntoAcciones;
+non terminal String         accion;
+
+non terminal String         nuevaPagina;
+non terminal String         Ps;
+non terminal String         P1;
+non terminal String         parametrosParaNuevaPagina;
+
+
+non terminal String         modificarPagina;
+non terminal String         ParametrosYEtiquetas;
+non terminal String         parametrosParaModificarPagina;
+
+
+non terminal String         nuevoSitioWeb;
+non terminal String         P0s;
+non terminal String         P01;
+non terminal String         parametrosParaNuevoSitioWeb;
+
+
+non terminal String         borrarSitioWeb;
+non terminal String         PBSW;                            
+
+
+non terminal String         borrarPagina;
+non terminal String         PBP;  
+
+
+non terminal String         agregarComponente;
+non terminal String         modificarComponente;
+non terminal String         PsAC;
+non terminal String         ParametroClase;
+non terminal String         ParametroPagina;
+non terminal String         C;
+non terminal String         CPT;
+non terminal String         CPP;
+non terminal String         CPI;
+non terminal String         CPV;
+non terminal String         CPM;
+non terminal String         AT1;
+non terminal String         AT2;
+non terminal String         AP1;
+non terminal String         AP2;
+non terminal String         AI1;
+non terminal String         AI2;
+non terminal String         AV1;
+non terminal String         AV2;
+non terminal String         AM1;
+non terminal String         AM2;
+non terminal String         atributosParaTitulo;
+non terminal String         atributosParaParrafo;
+non terminal String         atributosParaImagen;
+non terminal String         atributosParaVideo;
+non terminal String         atributosParaMenu;
+
+non terminal String         atributoTexto;
+non terminal String         atributoAlineacion;
+non terminal String         atributoColor;
+non terminal String         atributoOrigen;
+non terminal String         atributoAltura;
+non terminal String         atributoAncho;
+non terminal String         atributoPadre;
+non terminal String         atributoEtiquetas;
+
+non terminal String         borrarComponente;
+non terminal String         PsBC;
+
+
+
+
+non terminal String         ParametroId;
+non terminal String         ParametroTitulo;
+non terminal String         ParametroSitio;
+non terminal String         ParametroPadre;
+non terminal String         ParametroUsuarioCreacion;
+non terminal String         ParametroFechaCreacion;
+non terminal String         ParametroFechaModificacion;
+non terminal String         ParametroUsuarioModificacion;
+
+non terminal String         Es;
+non terminal String         E1;
+non terminal String         E2;
+
+
+
+/*The Grammar*/
+
+start with inicio;
+
+/* 
+ =========================== Inicio =========================== 
+*/
+
+
+inicio ::=      accion  
+                |MenorQ Acciones MayorQ conjuntoAcciones MenorQ Diagonal Acciones MayorQ
+;
+
+
+conjuntoAcciones ::= accion
+
+        | conjuntoAcciones accion
+
+;
+
+
+
+accion ::= nuevoSitioWeb
+                {: 
+                    ventana.escribirEnTextAreaDeRespuestaDelServidor("Servidor: Analisis de accion: NUEVO_SITIO_WEB"); 
+                    boolean resultado = ManejadorVerificacionObligatorios.verificarObligatorios_NuevoSitioWeb();
+
+                    String textoAEnviar = ManejadorVerificacionObligatorios.generarEstructuraSitioWeb();
+                    ventana.enviarTextoAlServidor(textoAEnviar);
+
+                    ventana.escribirRespuestaSegunResultado(resultado,"OK: Estructura valida","ERROR: No se incluyeron los parametros obligatorios");
+                    ManejadorVerificacionObligatorios.limpiarParametros();
+                :}
+
+        | borrarSitioWeb
+                {: 
+
+                    ventana.escribirEnTextAreaDeRespuestaDelServidor("Analisis de accion: BORRAR_SITIO_WEB"); 
+                    boolean resultado = ManejadorVerificacionObligatorios.verificarObligatorios_BorrarSitioWeb();
+
+                    String textoAEnviar = ManejadorVerificacionObligatorios.generarEstructuraBorrarSitioWeb();
+                    ventana.enviarTextoAlServidor(textoAEnviar);
+
+                    ventana.escribirRespuestaSegunResultado(resultado,"OK: Estructura valida","ERROR: No se incluyeron los parametros obligatorios");
+                    ManejadorVerificacionObligatorios.limpiarParametros();
+                :}
+
+
+
+        | nuevaPagina
+                {:   
+                    ventana.escribirEnTextAreaDeRespuestaDelServidor("Servidor: Analisis de accion: NUEVA_PAGINA");
+                    boolean resultado = ManejadorVerificacionObligatorios.verificarObligatorios_NuevaPagina();
+
+                    String textoAEnviar = ManejadorVerificacionObligatorios.generarEstructuraPaginaWeb();
+                    ventana.enviarTextoAlServidor(textoAEnviar);
+
+                    ventana.escribirRespuestaSegunResultado(resultado,"OK: Estructura valida","ERROR: No se incluyo alguno los parametros obligatorios");
+                    ManejadorVerificacionObligatorios.limpiarParametros();
+                :}
+
+        | modificarPagina
+                {: 
+                    ventana.escribirEnTextAreaDeRespuestaDelServidor("Analisis de accion: MODIFICAR_PAGINAS"); 
+                    boolean resultado = ManejadorVerificacionObligatorios.verificarObligatorios_ModificarPagina();
+
+
+
+                    ventana.escribirRespuestaSegunResultado(resultado,"OK: Estructura valida","ERROR: No se incluyeron los parametros obligatorios");
+                    ManejadorVerificacionObligatorios.limpiarParametros();
+                :}
+
+
+
+        | borrarPagina
+                {:  
+                    ventana.escribirEnTextAreaDeRespuestaDelServidor("Servidor: Analisis de accion: BORRAR_PAGINA"); 
+                    boolean resultado = ManejadorVerificacionObligatorios.verificarObligatorios_BorrarPagina();
+
+                    String textoAEnviar = ManejadorVerificacionObligatorios.generarEstructuraBorrarPaginaWeb();
+                    ventana.enviarTextoAlServidor(textoAEnviar);
+
+                    ventana.escribirRespuestaSegunResultado(resultado,"OK: Estructura valida","ERROR: No se incluyeron los parametros obligatorios");
+                    ManejadorVerificacionObligatorios.limpiarParametros();
+                :}
+
+        | agregarComponente
+                {: 
+                    System.out.printf(">>>>>>>>>>>>>>>>>>>>>> Se completo Agregar Componente\n\n");  
+                    ventana.escribirEnTextAreaDeRespuestaDelServidor("Analisis de accion: AGREGAR_COMPONENTE"); 
+                    ventana.escribirEnTextAreaDeRespuestaDelServidor("       OK: Accion Completada"); 
+                :}
+
+        | modificarComponente
+                {: 
+                    System.out.printf(">>>>>>>>>>>>>>>>>>>>>> Se completo Modificar Componente\n\n");  
+                    ventana.escribirEnTextAreaDeRespuestaDelServidor("Analisis de accion: MODIFICAR_COMPONENTE"); 
+                    ventana.escribirEnTextAreaDeRespuestaDelServidor("      OK: Estructura valida"); 
+                :}
+
+
+        | borrarComponente
+                {: 
+                    System.out.printf(">>>>>>>>>>>>>>>>>>>>>> Se completo Borrar Componente\n\n");  
+                    ventana.escribirEnTextAreaDeRespuestaDelServidor("Analisis de accion: BORRAR_COMPONENTE"); 
+                    ventana.escribirEnTextAreaDeRespuestaDelServidor("      OK: Estructura valida"); 
+                :}
+
+
+
+
+;
+
+
+
+
+/* 
+ =========================== Nuevo Sitio Web =========================== 
+*/
+
+nuevoSitioWeb ::= MenorQ Accion Nombre Igual Comilla NuevoSitioWeb Comilla MayorQ P0s MenorQ Diagonal Accion MayorQ
+                    {: System.out.printf("nuevoSitioWeb ::=  a un monton\n\n"); :}
+;
+
+
+P0s ::= MenorQ Parametros MayorQ P01 MenorQ Diagonal Parametros MayorQ
+            {: System.out.printf("P0s ::= MenorQ Parametros MayorQ P01 MenorQ Diagonal Parametros MayorQ\n\n"); :}
+;
+
+
+P01 ::= parametrosParaNuevoSitioWeb
+            {: System.out.printf("P01 ::= parametrosParaNuevoSitioWeb\n\n"); :}
+    | P01 parametrosParaNuevoSitioWeb
+            {: System.out.printf("P01 ::= P01 parametrosParaNuevoSitioWeb\n\n"); :}
+
+;
+
+
+
+/* 
+ =========================== Borrar Sitio Web =========================== 
+*/
+
+borrarSitioWeb ::= MenorQ Accion Nombre Igual Comilla BorrarSitioWeb Comilla MayorQ PBSW MenorQ Diagonal Accion MayorQ
+                    {: System.out.printf("nuevoSitioWeb ::=  a un monton\n\n"); :}
+;
+
+PBSW ::= MenorQ Parametros MayorQ ParametroId MenorQ Diagonal Parametros MayorQ
+            {: System.out.printf("P0s ::= MenorQ Parametros MayorQ P01 MenorQ Diagonal Parametros MayorQ\n\n"); :}
+;
+
+
+
+/* 
+ =========================== Nueva Pagina =========================== 
+*/
+
+nuevaPagina ::= MenorQ Accion Nombre Igual Comilla NuevaPagina Comilla MayorQ Ps Es MenorQ Diagonal Accion MayorQ
+                    {: System.out.printf("s1 --> Ps Es\n\n"); :}
+
+              | MenorQ Accion Nombre Igual Comilla NuevaPagina Comilla MayorQ Ps MenorQ Diagonal Accion MayorQ
+                    {: System.out.printf("s1 --> Ps\n\n"); :}
+
+;
+
+
+Ps ::= MenorQ Parametros MayorQ P1 MenorQ Diagonal Parametros MayorQ
+            {: System.out.printf("Ps --> P1 parametrosParaNuevaPagina P3\n\n"); :}
+;
+
+
+P1 ::= parametrosParaNuevaPagina
+            {: System.out.printf("P1 ::= parametrosParaNuevaPagina\n\n"); :}
+    | P1 parametrosParaNuevaPagina
+            {: System.out.printf("P1 ::= P1 parametrosParaNuevaPagina\n\n"); :}
+
+;
+
+
+
+/* 
+ =========================== Modificar Pagina =========================== 
+*/
+
+
+modificarPagina ::= MenorQ Accion Nombre Igual Comilla ModificarPagina Comilla MayorQ ParametrosYEtiquetas MenorQ Diagonal Accion MayorQ
+                    {: System.out.printf("modificarPagina --> PE Es\n\n"); :}
+;
+
+
+
+ParametrosYEtiquetas ::= MenorQ Parametros MayorQ ParametroId ParametroTitulo MenorQ Diagonal Parametros MayorQ Es
+                                {: System.out.printf("Ps --> P1 parametrosParaNuevaPagina P3\n\n"); :}
+
+                        | MenorQ Parametros MayorQ ParametroTitulo ParametroId MenorQ Diagonal Parametros MayorQ 
+                                {: System.out.printf("Ps --> P1 parametrosParaNuevaPagina P3\n\n"); :}
+
+                        | MenorQ Parametros MayorQ ParametroId MenorQ Diagonal Parametros MayorQ Es
+                                {: System.out.printf("Ps --> P1 parametrosParaNuevaPagina P3\n\n"); :}
+;
+
+
+
+
+
+/* 
+ =========================== Borrar Pagina =========================== 
+*/
+
+borrarPagina ::= MenorQ Accion Nombre Igual Comilla BorrarPagina Comilla MayorQ PBP MenorQ Diagonal Accion MayorQ
+                    {: System.out.printf("nuevoSitioWeb ::=  a un monton\n\n"); :}
+;
+
+PBP ::= MenorQ Parametros MayorQ ParametroId MenorQ Diagonal Parametros MayorQ
+            {: System.out.printf("P0s ::= MenorQ Parametros MayorQ P01 MenorQ Diagonal Parametros MayorQ\n\n"); :}
+;
+
+
+
+/* 
+ =========================== Agregar/Modificar Componente =========================== 
+*/
+
+
+agregarComponente ::= MenorQ Accion Nombre Igual Comilla AgregarComponente Comilla MayorQ PsAC MenorQ Diagonal Accion MayorQ
+                            {: System.out.printf("agregarComponente ::=  a un monton\n\n"); :}
+; 
+
+modificarComponente ::= MenorQ Accion Nombre Igual Comilla ModificarComponente Comilla MayorQ PsAC MenorQ Diagonal Accion MayorQ
+                            {: System.out.printf("agregarComponente ::=  a un monton\n\n"); :}
+; 
+
+PsAC ::= MenorQ Parametros MayorQ ParametroId ParametroPagina ParametroClase                                            
+            {: System.out.printf("PsAC ::= a un monton\n\n"); :}
+;
+
+ParametroClase ::= MenorQ Parametro Nombre Igual Comilla Clase Comilla MayorQ C                                          
+            {: System.out.printf("ParametroPagina ::= \n\n"); :}
+;
+
+C ::= Titulo CPT
+    | Parrafo CPP
+    | Imagen CPI
+    | Video CPV
+    | Menu CPM
+;
+
+CPT ::= MenorQ Diagonal Parametro MayorQ MenorQ Diagonal Parametros MayorQ AT1
+;
+
+CPP ::= MenorQ Diagonal Parametro MayorQ MenorQ Diagonal Parametros MayorQ AP1
+;
+
+CPI ::= MenorQ Diagonal Parametro MayorQ MenorQ Diagonal Parametros MayorQ AI1
+;
+
+CPV ::= MenorQ Diagonal Parametro MayorQ MenorQ Diagonal Parametros MayorQ AV1
+;
+
+CPM ::= MenorQ Diagonal Parametro MayorQ MenorQ Diagonal Parametros MayorQ AM1
+;
+
+
+
+
+
+AT1 ::= MenorQ Atributos MayorQ AT2 MenorQ Diagonal Atributos MayorQ
+;
+
+AT2 ::= atributosParaTitulo
+        | AT2 atributosParaTitulo
+;
+
+
+
+
+AP1 ::= MenorQ Atributos MayorQ AP2 MenorQ Diagonal Atributos MayorQ
+;
+
+AP2 ::= atributosParaParrafo
+        | AP2 atributosParaParrafo
+;
+
+
+AI1 ::= MenorQ Atributos MayorQ AI2 MenorQ Diagonal Atributos MayorQ
+;
+
+AI2 ::= atributosParaImagen
+        | AI2 atributosParaImagen
+;
+
+
+AV1 ::= MenorQ Atributos MayorQ AV2 MenorQ Diagonal Atributos MayorQ
+;
+
+AV2 ::= atributosParaVideo
+        | AV2 atributosParaVideo
+;
+
+
+AM1 ::= MenorQ Atributos MayorQ AM2 MenorQ Diagonal Atributos MayorQ
+;
+
+AM2 ::= atributosParaMenu
+        | AM2 atributosParaMenu
+;
+
+
+
+
+/* 
+ =========================== Borrar Componente =========================== 
+*/
+
+
+borrarComponente ::= MenorQ Accion Nombre Igual Comilla BorrarComponente Comilla MayorQ PsBC MenorQ Diagonal Accion MayorQ
+                            {: System.out.printf("agregarComponente ::=  a un monton\n\n"); :}
+; 
+
+
+PsBC ::= MenorQ Parametros MayorQ ParametroId ParametroPagina MenorQ Diagonal Parametros MayorQ                                        
+            {: System.out.printf("PsAC ::= a un monton\n\n"); :}
+;
+
+
+/* 
+
+
+
+
+
+
+    =========================== Atributos de Componentes =========================== 
+*/
+
+atributosParaTitulo ::= atributoTexto
+                    | atributoAlineacion
+                    |atributoColor
+;
+
+atributosParaParrafo ::= atributoTexto
+                    | atributoAlineacion
+                    |atributoColor
+;
+
+atributosParaImagen ::= atributoOrigen
+                    | atributoAlineacion
+                    |atributoAltura
+                    |atributoAncho
+;
+
+atributosParaVideo ::= atributoOrigen
+                    |atributoAltura
+                    |atributoAncho
+;
+
+atributosParaMenu ::= atributoPadre
+                    |atributoEtiquetas
+
+;
+
+
+atributoTexto ::=  MenorQ Atributo Nombre Igual Comilla Texto Comilla MayorQ Oracion MenorQ Diagonal Atributo MayorQ
+            {: System.out.printf("atributoTexto ::=  \n\n"); :}
+;
+
+atributoAlineacion ::=  MenorQ Atributo Nombre Igual Comilla Alineacion Comilla MayorQ Centrar MenorQ Diagonal Atributo MayorQ
+            {: System.out.printf("atributoTexto ::=  \n\n"); :}
+
+                        | MenorQ Atributo Nombre Igual Comilla Alineacion Comilla MayorQ Izquierda MenorQ Diagonal Atributo MayorQ
+            {: System.out.printf("atributoTexto ::=  \n\n"); :}
+
+                        | MenorQ Atributo Nombre Igual Comilla Alineacion Comilla MayorQ Derecha MenorQ Diagonal Atributo MayorQ
+            {: System.out.printf("atributoTexto ::=  \n\n"); :}
+
+                        | MenorQ Atributo Nombre Igual Comilla Alineacion Comilla MayorQ Justificar MenorQ Diagonal Atributo MayorQ
+            {: System.out.printf("atributoTexto ::=  \n\n"); :}
+;
+
+atributoColor ::=  MenorQ Atributo Nombre Igual Comilla Color Comilla MayorQ Hexadecimal MenorQ Diagonal Atributo MayorQ
+            {: System.out.printf("atributoTexto ::=  \n\n"); :}
+;
+
+atributoOrigen ::=  MenorQ Atributo Nombre Igual Comilla Origen Comilla MayorQ Url MenorQ Diagonal Atributo MayorQ
+            {: System.out.printf("atributoTexto ::=  \n\n"); :}
+;
+
+atributoAltura ::=  MenorQ Atributo Nombre Igual Comilla Altura Comilla MayorQ Entero MenorQ Diagonal Atributo MayorQ
+            {: System.out.printf("atributoTexto ::=  \n\n"); :}
+;
+
+atributoAncho ::=  MenorQ Atributo Nombre Igual Comilla Ancho Comilla MayorQ Entero MenorQ Diagonal Atributo MayorQ
+            {: System.out.printf("atributoTexto ::=  \n\n"); :}
+;
+
+
+atributoPadre ::=  MenorQ Atributo Nombre Igual Comilla Padre Comilla MayorQ Identificador MenorQ Diagonal Atributo MayorQ
+            {: System.out.printf("atributoTexto ::=  \n\n"); :}
+;
+
+atributoEtiquetas ::=  MenorQ Atributo Nombre Igual Comilla Etiquetas Comilla MayorQ Identificador MenorQ Diagonal Atributo MayorQ
+            {: System.out.printf("atributoTexto ::=  \n\n"); :}
+;
+
+
+
+
+
+/* 
+
+
+
+
+
+
+    =========================== Parametros Especificos =========================== 
+*/
+
+parametrosParaNuevoSitioWeb ::= ParametroId
+
+                            | ParametroUsuarioCreacion
+
+                            | ParametroFechaCreacion
+
+                            | ParametroFechaModificacion
+
+                            | ParametroUsuarioModificacion
+;
+
+
+
+parametrosParaNuevaPagina ::= ParametroId
+
+                            | ParametroTitulo
+
+                            | ParametroSitio
+
+                            | ParametroPadre
+
+                            | ParametroUsuarioCreacion
+
+                            | ParametroFechaCreacion
+
+                            | ParametroFechaModificacion
+
+                            | ParametroUsuarioModificacion
+;
+
+parametrosParaModificarPagina ::= ParametroId
+
+                                | ParametroSitio
+
+                                | ParametroPadre
+
+                                | ParametroUsuarioCreacion
+
+                                | ParametroFechaCreacion
+
+                                | ParametroFechaModificacion
+
+                                | ParametroUsuarioModificacion
+;
+
+
+
+ParametroId ::= MenorQ Parametro Nombre Igual Comilla Id Comilla MayorQ Identificador:i MenorQ Diagonal Parametro MayorQ
+            {: System.out.printf("ParametroId ::= \n\n"); ManejadorVerificacionObligatorios.ID = i; :}
+;
+
+
+ParametroTitulo ::= MenorQ Parametro Nombre Igual Comilla Titulo Comilla MayorQ Oracion:t MenorQ Diagonal Parametro MayorQ
+            {: System.out.printf("ParametroTitulo ::=\n\n"); ManejadorVerificacionObligatorios.TITULO = t; :}
+;
+
+
+ParametroSitio ::= MenorQ Parametro Nombre Igual Comilla Sitio Comilla MayorQ Identificador:i MenorQ Diagonal Parametro MayorQ
+            {: System.out.printf("ParametroSitio ::= pijo\n\n"); ManejadorVerificacionObligatorios.SITIO = i; :}
+;
+
+ParametroPadre ::= MenorQ Parametro Nombre Igual Comilla Padre Comilla MayorQ Identificador:i MenorQ Diagonal Parametro MayorQ
+            {: System.out.printf("ParametroPadre ::= un pijo\n\n"); ManejadorVerificacionObligatorios.PADRE = i;  :}
+;
+
+
+ParametroUsuarioCreacion ::= MenorQ Parametro Nombre Igual Comilla UsuarioCreacion Comilla MayorQ Identificador:i MenorQ Diagonal Parametro MayorQ
+            {: System.out.printf("ParametroUsuarioCreacion ::= un pijo\n\n"); ManejadorVerificacionObligatorios.USUARIO_CREACION = i;  :}
+;
+
+
+ParametroFechaCreacion ::= MenorQ Parametro Nombre Igual Comilla FechaCreacion Comilla MayorQ Fecha:f MenorQ Diagonal Parametro MayorQ
+            {: System.out.printf("ParametroFechaCreacion ::= un pijo\n\n"); ManejadorVerificacionObligatorios.FECHA_CREACION = f; :}
+;
+
+
+ParametroFechaModificacion ::= MenorQ Parametro Nombre Igual Comilla FechaModificacion Comilla MayorQ Fecha:f MenorQ Diagonal Parametro MayorQ
+            {: System.out.printf("ParametroFechaModificacion ::=un pijo\n\n"); ManejadorVerificacionObligatorios.FECHA_MODIFICACION = f; :}
+;
+
+
+ParametroUsuarioModificacion ::= MenorQ Parametro Nombre Igual Comilla UsuarioModificacion Comilla MayorQ Identificador:i MenorQ Diagonal Parametro MayorQ
+            {: System.out.printf("ParametroUsuarioModificacion ::= un pijo\n\n"); ManejadorVerificacionObligatorios.USUARIO_MODIFICACION = i; :}
+;
+
+ParametroPagina::= MenorQ Parametro Nombre Igual Comilla Pagina Comilla MayorQ Identificador:i MenorQ Diagonal Parametro MayorQ
+            {: System.out.printf("ParametroPagina ::= \n\n"); ManejadorVerificacionObligatorios.PAGINA = i; :}
+;
+
+
+
+/* 
+    =========================== Etiquetas y Etiqueta =========================== 
+*/
+
+Es ::= MenorQ Etiquetas MayorQ E1 MenorQ Diagonal Etiquetas MayorQ
+                {: System.out.printf("Es ::=\n\n"); :}
+;
+
+E1 ::= E2
+                {: System.out.printf("E1 ::= E2 E2\n\n"); :}
+
+    | E1 E2
+                {: System.out.printf("E1 ::= E1 E2\n\n"); :}
+;
+
+E2 ::= MenorQ Etiqueta Valor Igual Id_Etiqueta:ei Diagonal MayorQ
+                {: System.out.printf("E2 ::= un pijoi\n\n"); 
+                   ManejadorVerificacionObligatorios.listadoEtiquetas.add(ei);
+                
+                :}
+;
+
+
+
+
+
+
+/* 
+
+
+
+
+
+
+
+
+
+
+    =========================== Acortadores =========================== 
+*/
+
+MenorQ ::= MENOR_Q:meq
+    {: RESULT = meq; :}
+;
+
+MayorQ ::= MAYOR_Q:maq
+    {: RESULT = maq; :}
+;
+
+Diagonal ::= DIAGONAL:d
+    {: RESULT = d; :}
+;
+
+Comilla ::= COMILLA:c
+    {: RESULT = c; :}
+;
+
+/*=================================*/
+
+Atributo ::= ATRIBUTO:a
+    {: RESULT = a; :}
+;
+
+Atributos ::= ATRIBUTOS:as
+    {: RESULT = as; :}
+;
+
+Accion ::= ACCION:ac
+    {: RESULT = ac; :}
+;
+
+Acciones ::= ACCIONES:acs
+    {: RESULT = acs; :}
+;
+
+Nombre ::= NOMBRE:n
+    {: RESULT = n; :}
+;
+
+Parametro ::= PARAMETRO:p
+    {: RESULT = p; :}
+;
+
+
+Parametros ::= PARAMETROS:ps
+    {: RESULT = ps; :}
+;
+
+Etiqueta ::= ETIQUETA:e
+    {: RESULT = e; :}
+;
+
+Etiquetas ::= ETIQUETAS:es
+    {: RESULT = es; :}
+;
+
+Valor ::= VALOR:v
+    {: RESULT = v; :}
+;
+
+/*=================================*/
+
+
+NuevoSitioWeb ::= NUEVO_SITIO_WEB:nsw
+    {: RESULT = nsw; :}
+;
+
+
+BorrarSitioWeb ::= BORRAR_SITIO_WEB:bsw
+    {: RESULT = bsw; :}
+;
+
+
+NuevaPagina ::= NUEVA_PAGINA:np
+    {: RESULT = np; :}
+;
+
+
+ModificarPagina ::= MODIFICAR_PAGINA:mp
+    {: RESULT = mp; :}
+;
+
+BorrarPagina ::= BORRAR_PAGINA:bp
+    {: RESULT = bp; :}
+;
+
+AgregarComponente ::= AGREGAR_COMPONENTE:acp
+    {: RESULT = acp; :}
+;
+
+ModificarComponente ::= MODIFICAR_COMPONENTE:mcp
+    {: RESULT = mcp; :}
+;
+
+BorrarComponente ::= BORRAR_COMPONENTE:bcp
+    {: RESULT = bcp; :}
+;
+
+/*=================================*/
+
+Id ::= ID:i
+    {: RESULT = i; :}
+;
+
+UsuarioCreacion ::= USUARIO_CREACION:uc
+    {: RESULT = uc; :}
+;
+
+FechaCreacion ::= FECHA_CREACION:fc
+    {: RESULT = fc; :}
+;
+
+FechaModificacion ::= FECHA_MODIFICACION:fm
+    {: RESULT = fm; :}
+;
+
+UsuarioModificacion ::= USUARIO_MODIFICACION:um 
+    {: RESULT = um; :}
+;
+
+Titulo ::= TITULO:t 
+    {: RESULT = t; :}
+;
+
+Sitio ::= SITIO:st 
+    {: RESULT = st; :}
+;
+
+Padre ::= PADRE:pd
+    {: RESULT = pd; :}
+;
+
+Pagina ::= PAGINA:pag
+    {: RESULT = pag; :}
+;
+
+Clase ::= CLASE:cla
+    {: RESULT = cla; :}
+;
+
+/*=================================*/
+
+Parrafo ::= PARRAFO:par
+    {: RESULT = par; :}
+;
+
+Imagen ::= IMAGEN:img
+    {: RESULT = img; :}
+;
+
+Video ::= VIDEO:vid
+    {: RESULT = vid; :}
+;
+
+Menu ::= MENU:menu
+    {: RESULT = menu; :}
+;
+
+Texto ::= TEXTO:tex
+    {: RESULT = tex; :}
+;
+
+Alineacion ::= ALINEACION:ali
+    {: RESULT = ali; :}
+;
+
+Centrar ::= CENTRAR:cen
+    {: RESULT = cen; :}
+;
+
+Izquierda ::= IZQUIERDA:iz
+    {: RESULT = iz; :}
+;
+
+Derecha ::= DERECHA:der
+    {: RESULT = der; :}
+;
+
+Justificar ::= JUSTIFICAR:j
+    {: RESULT = j; :}
+;
+
+Color ::= COLOR:col
+    {: RESULT = col; :}
+;
+
+Altura ::= ALTURA:alt
+    {: RESULT = alt; :}
+;
+
+Ancho ::= ANCHO:an
+    {: RESULT = an; :}
+;
+
+Identificador ::= IDENTIFICADOR:ide
+    {: RESULT = ide; :}
+;
+
+Igual ::= IGUAL:ig
+    {: RESULT = ig; :}
+;
+
+Origen ::= ORIGEN:og
+    {: RESULT = og; :}
+;
+
+Dato ::= DATO:dat
+    {: RESULT = dat; :}
+;
+
+Oracion ::= ORACION:ora
+    {: RESULT = ora; :}
+;
+
+Fecha ::= FECHA:fech
+    {: RESULT = fech; :}
+;
+
+
+Id_Etiqueta ::= ID_ETIQUETA:idet
+    {: RESULT = idet; :}
+;
+
+Entero ::= ENTERO:ent
+    {: RESULT = ent; :}
+;
+
+Hexadecimal ::= HEXADECIMAL:hex
+    {: RESULT = hex; :}
+;
+
+Url ::= URL:hex
+    {: RESULT = hex; :}
+;
+
+
+

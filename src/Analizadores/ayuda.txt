@@ -1,0 +1,60 @@
+/*No Terminales*/
+
+
+non terminal String Enter;
+
+non terminal String MenorQ;
+non terminal String MayorQ;
+non terminal String Diagonal;
+non terminal String Comilla;
+non terminal String Iiual;
+non terminal String A_Corchete;
+non terminal String C_Corchete;
+
+non terminal String Atributo;
+non terminal String Atributos;
+non terminal String Accion;
+non terminal String Acciones;
+non terminal String Nombre;
+non terminal String Parametro;
+non terminal String Parametros;
+non terminal String Etiqueta;
+non terminal String Etiquetas;
+non terminal String Valor;
+
+non terminal String NuevoSitioWeb;
+non terminal String BorrarSitioWeb;
+non terminal String NuevaPagina;
+non terminal String ModificarPagina;
+non terminal String BorrarPagina;
+non terminal String AgregarComponente;
+non terminal String ModificarComponente;
+non terminal String BorrarComponente;
+
+non terminal String Id;
+non terminal String UsuarioCreacion;
+non terminal String FechaCreacion;
+non terminal String FechaModificacion;
+non terminal String UsuarioModificacon;
+non terminal String Titulo;
+non terminal String Sitio;
+non terminal String Padre;
+non terminal String Pagina;
+non terminal String Clase;
+
+non terminal String Parrafo;
+non terminal String Imagrn;
+non terminal String Video;
+non terminal String Menu;
+
+non terminal String Texto;
+non terminal String Alienacion;
+non terminal String Centrar;
+non terminal String Izquierda;
+non terminal String Derecha;
+non terminal String Justificar;
+
+non terminal String Color;
+non terminal String Altura;
+non terminal String Ancho;
+non terminal String Identificador;

@@ -55,7 +55,7 @@ public class ManejadorVerificacionObligatorios {
                 + "</sitioWeb>\n\n";
 
         return estructura;
-
+        
     }
 
     public static String generarEstructuraPaginaWeb() {

@@ -1,0 +1,150 @@
+package AnalisisUsuarios;
+import gui.Frames.VentanaIniciarSesion;
+import java_cup.runtime.*;
+
+
+parser code {:
+
+;
+
+
+VentanaIniciarSesion ventana;
+
+
+    public parser(usuarioLexer lexer, VentanaIniciarSesion ventana) {
+		super(lexer);
+        this.ventana = ventana;
+	}
+
+
+    public void syntax_error(Symbol cur_token) {
+            System.out.println("Error sobrecargado <" + cur_token.value + "> || "   
+            + cur_token.sym+" \n");
+            //ventana.agregarTexto("     *** ERROR: Comando invalido ***");
+            //ventana.agregarTexto("     *** Componente:  \"" + cur_token.value + "\" no reconocido");  
+    }
+
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        System.out.println("Error síntactico irrecuperable en la Línea " + 
+        (s.left)+ " Columna "+s.right+". Componente: " + s.value + 
+        " no reconocido.\n");
+        
+    }  
+
+    
+
+        
+:}
+
+
+
+/* Terminals*/
+
+terminal String         MENOR_Q;
+terminal String         MAYOR_Q;
+terminal String         DIAGONAL;
+terminal String         USUARIO; 
+terminal String         NOMBRE; 
+terminal String         CONTRASENIA; 
+terminal String         IDENTIFICADOR; 
+terminal String         PASSWORD; 
+
+
+
+
+/*No Terminales*/
+
+non terminal String         MenorQ;
+non terminal String         MayorQ;
+non terminal String         Diagonal;
+non terminal String         Usuario; 
+non terminal String         Nombre; 
+non terminal String         Contrasenia; 
+non terminal String         Identificador; 
+non terminal String         Password;
+
+
+non terminal String         inicio;
+non terminal String         usuario;
+non terminal String         nombre;
+non terminal String         contrasenia;
+
+
+
+
+/*The Grammar*/
+
+start with inicio;
+
+inicio ::= usuario
+            | inicio usuario
+;
+
+
+usuario ::= MenorQ Usuario MayorQ nombre:nom contrasenia:pas MenorQ Diagonal Usuario MayorQ
+    {: System.out.println("Nombre: " + nom + "     Contrasenia: " + pas); ventana.enlistarUsuarios(nom,pas); :}
+;
+
+
+nombre ::= MenorQ Nombre MayorQ Identificador:i MenorQ Diagonal Nombre MayorQ
+    {: RESULT=i; :}
+;
+
+
+contrasenia ::= MenorQ Contrasenia MayorQ Password:p MenorQ Diagonal Contrasenia MayorQ
+    {: RESULT=p; :}
+;
+
+
+
+/*
+
+    =========================== Acortadores =========================== 
+*/
+
+MenorQ ::= MENOR_Q:meq
+    {: RESULT = meq; :}
+;
+
+MayorQ ::= MAYOR_Q:maq
+    {: RESULT = maq; :}
+;
+
+Diagonal ::= DIAGONAL:d
+    {: RESULT = d; :}
+;
+
+
+
+/*=================================*/
+
+Usuario ::= USUARIO:usr
+    {: RESULT = usr; :}
+;
+
+
+Nombre ::= NOMBRE:n
+    {: RESULT = n; :}
+;
+
+Contrasenia ::= CONTRASENIA:ctr
+    {: RESULT = ctr; :}
+;
+
+/*=================================*/
+
+Identificador ::= IDENTIFICADOR:id
+    {: RESULT = id; :}
+;
+
+Password ::= PASSWORD:pass
+    {: RESULT = pass; :}
+;
+
+
+
+
+
+
+
+
