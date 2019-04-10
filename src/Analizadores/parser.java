@@ -870,11 +870,12 @@ class CUP$parser$actions {
             {
               String RESULT =null;
 		 
-                    System.out.printf(">>>>>>>>>>>>>>>>>>>>>> Se completo Modificar Pagina\n\n");  
                     ventana.escribirEnTextAreaDeRespuestaDelServidor("Analisis de accion: MODIFICAR_PAGINAS"); 
                     boolean resultado = ManejadorVerificacionObligatorios.verificarObligatorios_ModificarPagina();
+
+
+
                     ventana.escribirRespuestaSegunResultado(resultado,"OK: Estructura valida","ERROR: No se incluyeron los parametros obligatorios");
-                    ManejadorVerificacionObligatorios.imprimirListadoEtiquetas();
                     ManejadorVerificacionObligatorios.limpiarParametros();
                 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("accion",57, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
@@ -1050,7 +1051,12 @@ class CUP$parser$actions {
           case 25: // ParametrosYEtiquetas ::= MenorQ Parametros MayorQ ParametroId ParametroTitulo MenorQ Diagonal Parametros MayorQ Es 
             {
               String RESULT =null;
-		 System.out.printf("Ps --> P1 parametrosParaNuevaPagina P3\n\n"); 
+		 
+
+                                    String textoAEnviar = ManejadorVerificacionObligatorios.generarEstructuraModificarPaginaWeb1();
+                                    System.out.printf(textoAEnviar);                            
+                                    ventana.enviarTextoAlServidor(textoAEnviar);
+                                
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ParametrosYEtiquetas",63, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1059,7 +1065,12 @@ class CUP$parser$actions {
           case 26: // ParametrosYEtiquetas ::= MenorQ Parametros MayorQ ParametroTitulo ParametroId MenorQ Diagonal Parametros MayorQ 
             {
               String RESULT =null;
-		 System.out.printf("Ps --> P1 parametrosParaNuevaPagina P3\n\n"); 
+		 
+                                    System.out.printf("Ps --> P1 parametrosParaNuevaPagina P3\n\n"); 
+                                    String textoAEnviar = ManejadorVerificacionObligatorios.generarEstructuraModificarPaginaWeb2();
+                                    System.out.printf(textoAEnviar);
+                                    ventana.enviarTextoAlServidor(textoAEnviar);
+                                
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ParametrosYEtiquetas",63, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1068,7 +1079,12 @@ class CUP$parser$actions {
           case 27: // ParametrosYEtiquetas ::= MenorQ Parametros MayorQ ParametroId MenorQ Diagonal Parametros MayorQ Es 
             {
               String RESULT =null;
-		 System.out.printf("Ps --> P1 parametrosParaNuevaPagina P3\n\n"); 
+		 
+                                    System.out.printf("Ps --> P1 parametrosParaNuevaPagina P3\n\n"); 
+                                    String textoAEnviar = ManejadorVerificacionObligatorios.generarEstructuraModificarPaginaWeb3();
+                                    System.out.printf(textoAEnviar);
+                                    ventana.enviarTextoAlServidor(textoAEnviar);
+                                
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ParametrosYEtiquetas",63, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

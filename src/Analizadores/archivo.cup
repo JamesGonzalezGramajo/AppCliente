@@ -460,17 +460,31 @@ modificarPagina ::= MenorQ Accion Nombre Igual Comilla ModificarPagina Comilla M
 
 
 ParametrosYEtiquetas ::= MenorQ Parametros MayorQ ParametroId ParametroTitulo MenorQ Diagonal Parametros MayorQ Es
-                                {: System.out.printf("Ps --> P1 parametrosParaNuevaPagina P3\n\n"); :}
+                                {: 
+
+                                    String textoAEnviar = ManejadorVerificacionObligatorios.generarEstructuraModificarPaginaWeb1();
+                                    System.out.printf(textoAEnviar);                            
+                                    ventana.enviarTextoAlServidor(textoAEnviar);
+                                :}
 
                         | MenorQ Parametros MayorQ ParametroTitulo ParametroId MenorQ Diagonal Parametros MayorQ 
-                                {: System.out.printf("Ps --> P1 parametrosParaNuevaPagina P3\n\n"); :}
+                                {: 
+                                    System.out.printf("Ps --> P1 parametrosParaNuevaPagina P3\n\n"); 
+                                    String textoAEnviar = ManejadorVerificacionObligatorios.generarEstructuraModificarPaginaWeb2();
+                                    System.out.printf(textoAEnviar);
+                                    ventana.enviarTextoAlServidor(textoAEnviar);
+                                :}
 
                         | MenorQ Parametros MayorQ ParametroId MenorQ Diagonal Parametros MayorQ Es
-                                {: System.out.printf("Ps --> P1 parametrosParaNuevaPagina P3\n\n"); :}
+                                {: 
+                                    System.out.printf("Ps --> P1 parametrosParaNuevaPagina P3\n\n"); 
+                                    String textoAEnviar = ManejadorVerificacionObligatorios.generarEstructuraModificarPaginaWeb3();
+                                    System.out.printf(textoAEnviar);
+                                    ventana.enviarTextoAlServidor(textoAEnviar);
+                                :}
+
+
 ;
-
-
-
 
 
 /* 

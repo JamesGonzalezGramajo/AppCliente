@@ -55,7 +55,7 @@ public class ManejadorVerificacionObligatorios {
                 + "</sitioWeb>\n\n";
 
         return estructura;
-        
+
     }
 
     public static String generarEstructuraPaginaWeb() {
@@ -83,22 +83,14 @@ public class ManejadorVerificacionObligatorios {
         return estructura1 + etiquetas + estructura2;
 
     }
-    
-    
 
-    public static String generarEstructuraModificarPaginaWeb() {
+    public static String generarEstructuraModificarPaginaWeb1() {
 
         String etiquetas = "";
 
         String estructura1 = "<modificarPaginaWeb>\n"
                 + "     <id> " + ID + " </id>\n"
-                + "     <sitio> " + SITIO + " </sitio>\n"
-                + "     <padre> " + PADRE + " </padre>\n"
-                + "     <titulo> [" + TITULO + "] </titulo>\n"
-                + "     <usuarioCreacion> " + USUARIO_CREACION + " </usuarioCreacion>\n"
-                + "     <fechaCreacion> " + FECHA_CREACION + " </fechaCreacion>\n"
-                + "     <usuarioModificacion> " + USUARIO_MODIFICACION + " </usuarioModificacion>\n"
-                + "     <fechaModificacion> " + FECHA_MODIFICACION + " </fechaModificacion>\n";
+                + "     <titulo> [" + TITULO + "] </titulo>\n";
 
         for (int i = 0; i < listadoEtiquetas.size(); i++) {
 
@@ -109,6 +101,36 @@ public class ManejadorVerificacionObligatorios {
         String estructura2 = "</modificarPaginaWeb>\n\n";
 
         return estructura1 + etiquetas + estructura2;
+
+    }
+
+    public static String generarEstructuraModificarPaginaWeb3() {
+
+        String etiquetas = "";
+
+        String estructura1 = "<modificarPaginaWeb>\n";
+
+        for (int i = 0; i < listadoEtiquetas.size(); i++) {
+
+            etiquetas = etiquetas + "     <etiqueta> " + listadoEtiquetas.get(i) + " </etiqueta>\n";
+
+        }
+
+        String estructura2 = "</modificarPaginaWeb>\n\n";
+
+        return estructura1 + etiquetas + estructura2;
+
+    }
+
+    public static String generarEstructuraModificarPaginaWeb2() {
+
+        String estructura1 = "<modificarPaginaWeb>\n"
+                + "     <titulo> [" + TITULO + "] </titulo>\n"
+                + "     <id> " + ID + " </id>\n";
+
+        String estructura2 = "</modificarPaginaWeb>\n\n";
+
+        return estructura1 + estructura2;
 
     }
 
