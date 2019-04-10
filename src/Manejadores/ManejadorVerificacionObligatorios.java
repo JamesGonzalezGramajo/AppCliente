@@ -99,7 +99,7 @@ public class ManejadorVerificacionObligatorios {
         }
 
         String estructura2 = "</modificarPaginaWeb>\n\n";
-
+        System.out.println(estructura1 + etiquetas + estructura2);
         return estructura1 + etiquetas + estructura2;
 
     }
@@ -108,7 +108,8 @@ public class ManejadorVerificacionObligatorios {
 
         String etiquetas = "";
 
-        String estructura1 = "<modificarPaginaWeb>\n";
+        String estructura1 = "<modificarPaginaWeb>\n"
+                + "          <id> " + ID + " </id>\n";
 
         for (int i = 0; i < listadoEtiquetas.size(); i++) {
 
